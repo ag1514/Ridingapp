@@ -26,7 +26,7 @@ const Home = () => {
     const panelCloseRef = useRef(null)
     const [ vehiclePanel, setVehiclePanel ] = useState(false)
     const [ confirmRidePanel, setConfirmRidePanel ] = useState(false)
-    const [ vehicleFound, setVehicleFound ] = useState(false)
+    const [ vehicleFound, setVehicleFound ] = useState(false)//this is for looking for a driver
     const [ waitingForDriver, setWaitingForDriver ] = useState(false)
     const [ pickupSuggestions, setPickupSuggestions ] = useState([])
     const [ destinationSuggestions, setDestinationSuggestions ] = useState([])
@@ -45,7 +45,6 @@ const Home = () => {
     }, [ user ])
 
     socket.on('ride-confirmed', ride => {
-
 
         setVehicleFound(false)
         setWaitingForDriver(true)
@@ -99,7 +98,6 @@ const Home = () => {
             gsap.to(panelRef.current, {
                 height: '70%',
                 padding: 24
-                // opacity:1
             })
             gsap.to(panelCloseRef.current, {
                 opacity: 1
@@ -176,11 +174,7 @@ const Home = () => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-
-
         setFare(response.data)
-
-
     }
 
     async function createRide() {
@@ -193,15 +187,12 @@ const Home = () => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-
-
     }
 
     return (
         <div className='h-screen relative overflow-hidden'>
             <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
             <div className='h-screen w-screen'>
-                {/* image for temporary use  */}
                 <LiveTracking />
             </div>
             <div className=' flex flex-col justify-end h-screen absolute top-0 w-full'>
